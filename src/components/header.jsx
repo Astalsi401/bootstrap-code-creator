@@ -11,6 +11,7 @@ import "../assets/styles/header.scss";
 library.add(fas, far);
 
 export function Header() {
+  const dispatch = useDispatch();
   const site = useSelector((state) => state.site);
   const handleCopy = async () => {
     const innerHtml = [...document.querySelectorAll(".edit-block")].map((editBlock) => {
@@ -27,9 +28,14 @@ export function Header() {
   return (
     <header>
       <SelectVersion />
-      <button className="copy" onClick={handleCopy}>
-        <FontAwesomeIcon icon="fa-solid fa-copy" />
-      </button>
+      <div className="tools">
+        <button className="copy" onClick={handleCopy}>
+          <FontAwesomeIcon icon="fa-solid fa-copy" />
+        </button>
+        <button className="reset" onClick={() => dispatch(setter({ rows: [], currentID: null, currntI: null }))}>
+          <FontAwesomeIcon icon="fa-solid fa-trash-can" />
+        </button>
+      </div>
     </header>
   );
 }

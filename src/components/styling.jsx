@@ -17,14 +17,14 @@ export function Styling({ stylingRef }) {
   const themeColor = useSelector((state) => state.themeColor[site]);
   const fontSize = useSelector((state) => state.fontSize[site]);
   const stylingActive = useSelector((state) => state.stylingActive);
-  const col = id !== null && rows[rows.findIndex((row) => row.id === id)].cols[i];
+  const col = id !== null && rows.length > 0 && rows[rows.findIndex((row) => row.id === id)].cols[i];
   const handleActive = () => dispatch(setter({ stylingActive: !stylingActive }));
   return (
     <div ref={stylingRef} className={`styling ${stylingActive ? "active" : ""}`}>
       <div className="toggle" onClick={handleActive}>
         {stylingActive ? <FontAwesomeIcon icon="fa-solid fa-xmark" /> : <FontAwesomeIcon icon="fa-solid fa-pen-to-square" />}
       </div>
-      {id !== null && stylingActive && (
+      {id !== null && rows.length > 0 && stylingActive && (
         <>
           <h1>Styles</h1>
           <label htmlFor="screen-size">

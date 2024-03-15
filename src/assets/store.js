@@ -15,7 +15,7 @@ const counterSlice = createSlice({
   initialState: {
     ver: "3.3.7",
     site: "ibmi",
-    rows: [{ id: 0, cols: [defaultCol] }],
+    rows: [],
     stylingActive: true,
     currentID: null,
     currntI: null,
@@ -87,6 +87,7 @@ const counterSlice = createSlice({
     setter: (state, { payload }) => {
       Object.keys(payload).forEach((key) => {
         state[key] = payload[key];
+        if (key === "rows") localStorage.setItem("rows", JSON.stringify(state.rows));
       });
     },
     setRow: (state, { payload }) => {
@@ -94,6 +95,8 @@ const counterSlice = createSlice({
       Object.keys(vals).forEach((key) => {
         const rowIndex = state.rows.findIndex((row) => row.id === id);
         state.rows[rowIndex][key] = vals[key];
+        console.log(state.rows);
+        localStorage.setItem("rows", JSON.stringify(state.rows));
       });
     },
     setCol: (state, { payload }) => {
@@ -101,6 +104,7 @@ const counterSlice = createSlice({
       Object.keys(vals).forEach((key) => {
         const rowIndex = state.rows.findIndex((row) => row.id === id);
         state.rows[rowIndex].cols[i][key] = vals[key];
+        localStorage.setItem("rows", JSON.stringify(state.rows));
       });
     },
   },
