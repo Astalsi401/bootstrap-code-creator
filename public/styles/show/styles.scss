@@ -1,0 +1,333 @@
+:root {
+  @each $colors in ($theme-color, $page-colors) {
+    @each $color, $value in $colors {
+      --c-#{$color}: #{$value};
+    }
+  }
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 200px;
+}
+@each $wh, $wh-value in (w: width, h: height) {
+  @each $length, $length-value in $block-length {
+    .#{$wh}-#{$length} {
+      #{$wh-value}: $length-value;
+    }
+    @each $screen, $screen-value in $screen-size {
+      .#{$wh}-#{$screen}-#{$length} {
+        #{$wh-value}: $length-value;
+      }
+      @media (max-width: $screen-value) {
+        .#{$wh}-#{$screen}-#{$length} {
+          #{$wh-value}: 100%;
+        }
+      }
+    }
+  }
+}
+.max-w-100 {
+  max-width: 100%;
+}
+@each $pos, $pos-value in $position-edge {
+  @each $neg, $neg-value in $negative {
+    @for $i from 0 through 10 {
+      .#{$pos}-#{$neg}#{$i} {
+        #{$pos-value}: calc(#{$neg-value}#{$unit} * #{$i});
+      }
+    }
+  }
+}
+@each $pos in $position {
+  .position-#{$pos} {
+    position: #{$pos};
+  }
+}
+@each $d in $display {
+  .d-#{$d} {
+    display: $d;
+  }
+  @each $screen, $screen-value in $screen-size {
+    @media (max-width: $screen-value) {
+      .d-#{$screen}-#{$d} {
+        display: $d !important;
+      }
+    }
+  }
+}
+@each $v in $visibility {
+  .#{$v} {
+    visibility: $v;
+  }
+  @each $screen, $screen-value in $screen-size {
+    @media (min-width: $screen-value) {
+      .#{$screen}-#{$v} {
+        visibility: $v !important;
+      }
+    }
+  }
+}
+@each $posk, $flex-pos in ("justify-content": $flex-justify-pos, "align-items": $flex-align-pos) {
+  @each $k, $p in $flex-pos {
+    .#{$posk}-#{$k} {
+      #{$posk}: $p;
+    }
+  }
+}
+@each $flex-wrap in (wrap, nowrap) {
+  .flex-#{$flex-wrap} {
+    flex-wrap: $flex-wrap;
+  }
+}
+.flex-grow-1 {
+  flex-grow: 1;
+}
+@each $flex-direction in (row, row-reverse, column, column-reverse) {
+  .flex-#{$flex-direction} {
+    flex-direction: $flex-direction;
+  }
+}
+@each $mp, $mp-val in ("m": margin, "p": padding) {
+  @each $side, $side-values in $element-side {
+    @each $neg, $neg-value in $negative {
+      @for $i from 0 through 10 {
+        .#{$mp}#{$side}-#{$neg}#{$i} {
+          @each $side-value in $side-values {
+            #{$mp-val}#{$side-value}: calc(#{$neg-value}#{$unit} * #{$i});
+          }
+        }
+        @each $screen, $screen-value in $screen-size {
+          @media (max-width: $screen-value) {
+            @each $side-value in $side-values {
+              .#{$mp}#{$side}-#{$screen}-#{$neg}#{$i} {
+                #{$mp-val}#{$side-value}: calc(#{$neg-value}#{$unit} * #{$i});
+              }
+            }
+          }
+        }
+      }
+      .#{$mp}#{$side}-auto {
+        @each $side-value in $side-values {
+          #{$mp-val}#{$side-value}: auto;
+        }
+      }
+    }
+  }
+}
+@each $text-decoration in $text-decoration {
+  .text-decoration-#{$text-decoration} {
+    text-decoration: #{$text-decoration};
+  }
+}
+@each $k, $size in $font-size {
+  .text-#{$k} {
+    font-size: $size !important;
+  }
+}
+@media (max-width: 767px) {
+  @each $k, $size in $font-size-mob {
+    .text-#{$k} {
+      font-size: $size !important;
+    }
+  }
+}
+@each $k, $height in $text-height {
+  .text-height-#{$k} {
+    line-height: $height;
+  }
+}
+@each $k, $pos in $text-posit {
+  .text-#{$k} {
+    text-align: $pos;
+  }
+}
+@each $weight, $value in $text-weight {
+  .text-#{$weight} {
+    font-weight: $value;
+  }
+}
+@each $colors in ($theme-color, $page-colors) {
+  @each $color, $value in $colors {
+    .text-#{$color} {
+      color: $value;
+      &:hover {
+        color: $value;
+      }
+    }
+    .bg-#{$color} {
+      background-color: $value;
+    }
+    .bd-#{$color} {
+      border-color: $value;
+    }
+    @each $screen, $screen-value in $screen-size {
+      @media (min-width: $screen-value) {
+        .text-#{$screen}-#{$color} {
+          color: $value;
+        }
+        .bg-#{$screen}-#{$color} {
+          background-color: $value;
+        }
+        .bd-#{$screen}-#{$color} {
+          border-color: $value;
+        }
+      }
+    }
+  }
+}
+.bg-img {
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@for $i from 0 through 5 {
+  .bd-#{$i} {
+    border-width: $i * 1px;
+  }
+}
+@each $s in $border-style {
+  .bd-#{$s} {
+    border-style: $s;
+  }
+}
+@each $sideY in (top, bottom) {
+  @each $sideX in (left, right) {
+    @for $i from 1 through 5 {
+      .rounded-#{$sideY}-#{$sideX}-#{$i} {
+        border-#{$sideY}-#{$sideX}-radius: calc(#{$unit} * #{$i});
+      }
+    }
+  }
+}
+@for $i from 1 through 5 {
+  .rounded-#{$i} {
+    border-radius: calc(#{$unit} * #{$i});
+  }
+}
+@each $overflow-value in $overflow {
+  .overflow-#{$overflow-value} {
+    overflow: $overflow-value;
+  }
+}
+.ratio-16x9 {
+  aspect-ratio: 16 / 9;
+}
+.ratio-4x3 {
+  aspect-ratio: 4 / 3;
+}
+.title-decoration {
+  position: relative;
+  line-height: 40px;
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    border: 0;
+    background-color: var(--c-title);
+    left: 0;
+    top: 20px;
+    z-index: 0;
+  }
+  strong {
+    display: inline-block;
+    padding-right: 25px;
+    position: relative;
+    font-size: 20pt;
+    &::before {
+      content: "";
+      @include round(10px);
+      position: absolute;
+      background-color: var(--c-title);
+      top: 15px;
+      right: 0;
+    }
+  }
+}
+.decoration {
+  position: relative;
+  padding-top: 40px;
+  margin-top: 60px !important;
+  h2 {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 0 10px 14px 0;
+    line-height: 40px;
+    width: min(400px, 100%);
+    translate: -11px -60px;
+    left: -15px;
+    &::before,
+    &::after {
+      content: "";
+      background-color: var(--c-title);
+      @include round(10px);
+    }
+    &::before {
+      top: calc(50% - 12px);
+      right: 0;
+    }
+    &::after {
+      left: -5px;
+      bottom: 0;
+    }
+  }
+}
+@media (max-width: 767px) {
+  .decoration {
+    &::before {
+      left: 229px;
+    }
+    h2 {
+      padding-bottom: 5px;
+      &::before {
+        top: 15px;
+      }
+    }
+  }
+  .title-decoration {
+    strong {
+      font-size: 20px;
+    }
+  }
+}
+.tag {
+  cursor: pointer;
+}
+.layer {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  &.active {
+    position: relative;
+    z-index: 1;
+    opacity: 1;
+  }
+}
+@for $i from 1 through 5 {
+  .backdrop-bilter-#{$i} {
+    backdrop-filter: blur(#{$i}px);
+  }
+}
+.zoom-box {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  opacity: 0;
+  z-index: -1;
+  &.active {
+    opacity: 1;
+    z-index: 10;
+    img {
+      object-fit: contain;
+      max-width: 100%;
+      max-height: 600px;
+      box-shadow: 0 0 50px var(--c-black);
+    }
+  }
+}
+.zoom {
+  cursor: pointer;
+}

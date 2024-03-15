@@ -1,0 +1,67 @@
+$screen-size: (
+  xs: 576px,
+  sm: 767px,
+  md: 991px,
+);
+$theme-color: (
+  "primary": #055eab,
+  "black": #000000,
+  "white": #ffffff,
+  "gray": #808080,
+  "title": #180085,
+  "inherit": inherit,
+);
+$page-colors: ();
+$text-size: (
+  "xxxx-large": 3rem,
+  "xxx-large": 2.2rem,
+  "xx-large": 2rem,
+  "x-large": 1.5rem,
+  "large": 1.1rem,
+  "medium": 1rem,
+  "small": 0.8rem,
+  "x-small": 0.75rem,
+  "xx-small": 0.6rem,
+);
+$unit: 5px;
+$negative: (
+  "": "",
+  "n": "-",
+);
+$element-side: (
+  "": (
+    "",
+  ),
+  x: (
+    "-left",
+    "-right",
+  ),
+  y: (
+    "-top",
+    "-bottom",
+  ),
+  t: (
+    "-top",
+  ),
+  b: (
+    "-bottom",
+  ),
+  s: (
+    "-left",
+  ),
+  e: (
+    "-right",
+  ),
+);
+$text-weight: (
+  bold: bold,
+  bolder: bolder,
+);
+$display: (flex, block, inline, inline-flex, inline-block, none);
+$block-length: (
+  100: 100%,
+  75: 75%,
+  50: 50%,
+  25: 25%,
+  0: 0,
+);

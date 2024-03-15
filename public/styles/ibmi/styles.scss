@@ -1,0 +1,122 @@
+:root {
+  @each $colors in ($theme-color, $page-colors) {
+    @each $color, $value in $colors {
+      --c-#{$color}: #{$value};
+    }
+  }
+}
+@each $colors in ($theme-color, $page-colors) {
+  @each $color, $value in $colors {
+    .text-#{$color} {
+      color: $value;
+      &:hover {
+        color: $value;
+      }
+    }
+    .bg-#{$color} {
+      background-color: $value !important;
+    }
+    .bd-#{$color} {
+      border-color: $value;
+    }
+    @each $screen, $screen-value in $screen-size {
+      @media (min-width: $screen-value) {
+        .text-#{$screen}-#{$color} {
+          color: $value;
+        }
+        .bg-#{$screen}-#{$color} {
+          background-color: $value;
+        }
+        .bd-#{$screen}-#{$color} {
+          border-color: $value;
+        }
+      }
+    }
+  }
+}
+@each $wh, $wh-value in (w: width, h: height) {
+  @each $length, $length-value in $block-length {
+    .#{$wh}-#{$length} {
+      #{$wh-value}: $length-value;
+    }
+  }
+}
+@each $screen, $screen-value in $screen-size {
+  @each $wh, $wh-value in (w: width, h: height) {
+    @each $length, $length-value in $block-length {
+      .#{$wh}-#{$screen}-#{$length} {
+        #{$wh-value}: $length-value !important;
+      }
+      @media (max-width: $screen-value) {
+        .#{$wh}-#{$screen}-#{$length} {
+          #{$wh-value}: 100% !important;
+        }
+      }
+    }
+  }
+}
+@each $mp, $mp-val in ("m": margin, "p": padding) {
+  @each $side, $side-values in $element-side {
+    @each $neg, $neg-value in $negative {
+      @for $i from 0 through 10 {
+        .#{$mp}#{$side}-#{$neg}#{$i} {
+          @each $side-value in $side-values {
+            #{$mp-val}#{$side-value}: calc(#{$neg-value}#{$unit} * #{$i});
+          }
+        }
+      }
+      .#{$mp}#{$side}-auto {
+        @each $side-value in $side-values {
+          #{$mp-val}#{$side-value}: auto;
+        }
+      }
+    }
+  }
+}
+@each $screen, $screen-value in $screen-size {
+  @each $mp, $mp-val in ("m": margin, "p": padding) {
+    @each $side, $side-values in $element-side {
+      @each $neg, $neg-value in $negative {
+        @for $i from 0 through 10 {
+          @media (max-width: $screen-value) {
+            @each $side-value in $side-values {
+              .#{$mp}#{$side}-#{$screen}-#{$neg}#{$i} {
+                #{$mp-val}#{$side-value}: calc(#{$neg-value}#{$unit} * #{$i});
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@each $size, $size-val in $text-size {
+  .text-#{$size} {
+    font-size: $size-val !important;
+  }
+}
+.text-12pt {
+  font-size: 12pt !important;
+}
+@each $weight, $value in $text-weight {
+  .text-#{$weight} {
+    font-weight: $value;
+  }
+}
+@each $d in $display {
+  .d-#{$d} {
+    display: $d;
+  }
+}
+@each $screen, $screen-value in $screen-size {
+  @media (min-width: $screen-value) {
+    @each $d in $display {
+      .d-#{$screen}-#{$d} {
+        display: $d;
+      }
+    }
+  }
+}
+.text-decoration-underline {
+  text-decoration: underline;
+}

@@ -1,0 +1,7 @@
+@mixin round($size) {
+  display: block;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  position: absolute;
+}
