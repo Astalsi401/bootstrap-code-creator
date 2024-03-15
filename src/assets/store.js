@@ -87,7 +87,11 @@ const counterSlice = createSlice({
     setter: (state, { payload }) => {
       Object.keys(payload).forEach((key) => {
         state[key] = payload[key];
-        if (key === "rows") localStorage.setItem("rows", JSON.stringify(state.rows));
+        if (key === "rows") {
+          localStorage.setItem("rows", JSON.stringify(state.rows));
+        } else if (["site", "ver"].includes(key)) {
+          localStorage.setItem(key, payload[key]);
+        }
       });
     },
     setRow: (state, { payload }) => {
@@ -95,7 +99,6 @@ const counterSlice = createSlice({
       Object.keys(vals).forEach((key) => {
         const rowIndex = state.rows.findIndex((row) => row.id === id);
         state.rows[rowIndex][key] = vals[key];
-        console.log(state.rows);
         localStorage.setItem("rows", JSON.stringify(state.rows));
       });
     },
