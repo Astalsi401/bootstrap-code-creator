@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCol, setter } from "../assets/store";
 import { library } from "@fortawesome/fontawesome-svg-core";

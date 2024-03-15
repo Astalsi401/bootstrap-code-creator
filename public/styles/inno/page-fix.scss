@@ -1,0 +1,35 @@
+html {
+  scroll-behavior: smooth;
+}
+:target {
+  padding-top: 100px;
+  margin-top: -100px;
+}
+.text-justify {
+  text-align: justify;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  & > * {
+    width: 100%;
+  }
+}
+
+@each $screen, $screen-value in $screen-size {
+  @if $screen != "xs" {
+    @media (min-width: $screen-value) {
+      @for $i from 1 through 12 {
+        .col-#{$screen}-#{$i} {
+          width: calc(100% / 12 * $i);
+        }
+      }
+    }
+  } @else {
+    @for $i from 1 through 12 {
+      .col-#{$screen}-#{$i} {
+        width: calc(100% / 12 * $i);
+      }
+    }
+  }
+}

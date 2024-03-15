@@ -1,0 +1,168 @@
+:root {
+  --nav-height: 95px;
+  @each $colors in ($theme-color, $page-color) {
+    @each $color, $value in $colors {
+      --c-#{$color}: #{$value};
+    }
+  }
+  @each $screen, $screen-value in $screen-size {
+    --c-#{$screen}: #{$screen-value};
+  }
+}
+@each $wh, $wh-value in (w: width, h: height) {
+  @each $length, $length-value in $block-length {
+    .#{$wh}-#{$length} {
+      #{$wh-value}: $length-value;
+    }
+    @each $screen, $screen-value in $screen-size {
+      .#{$wh}-#{$screen}-#{$length} {
+        #{$wh-value}: $length-value;
+      }
+      @media (max-width: $screen-value) {
+        .#{$wh}-#{$screen}-#{$length} {
+          #{$wh-value}: 100%;
+        }
+      }
+    }
+  }
+}
+@each $pos in $position {
+  .position-#{$pos} {
+    position: $pos;
+  }
+}
+@each $d in $display {
+  .d-#{$d} {
+    display: $d !important;
+  }
+  @each $screen, $screen-value in $screen-size {
+    @media (max-width: $screen-value) {
+      .d-#{$screen}-#{$d} {
+        display: $d !important;
+      }
+    }
+  }
+}
+@each $posk, $flex-pos in ("justify-content": $flex-justify-pos, "align-items": $flex-align-pos) {
+  @each $k, $p in $flex-pos {
+    .#{$posk}-#{$k} {
+      #{$posk}: $p;
+    }
+  }
+}
+@each $flex-wrap in (wrap, nowrap) {
+  .flex-#{$flex-wrap} {
+    flex-wrap: $flex-wrap;
+  }
+}
+.flex-grow-1 {
+  flex-grow: 1;
+}
+@each $mp, $mp-val in ("m": margin, "p": padding) {
+  @each $side, $side-values in $element-side {
+    .#{$mp}#{$side}-auto {
+      @each $side-value in $side-values {
+        #{$mp-val}#{$side-value}: auto;
+      }
+    }
+    @each $neg, $neg-value in $negative {
+      @for $i from 0 through 10 {
+        .#{$mp}#{$side}-#{$neg}#{$i} {
+          @each $side-value in $side-values {
+            #{$mp-val}#{$side-value}: calc(#{$neg-value}#{$unit} * #{$i});
+          }
+        }
+        @each $screen, $screen-value in $screen-size {
+          @media (max-width: $screen-value) {
+            @each $side-value in $side-values {
+              .#{$mp}#{$side}-#{$screen}-#{$neg}#{$i} {
+                #{$mp-val}#{$side-value}: calc(#{$neg-value}#{$unit} * #{$i});
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@each $text-decoration in $text-decoration {
+  .text-decoration-#{$text-decoration} {
+    text-decoration: #{$text-decoration};
+  }
+}
+@each $k, $size in $font-size {
+  .text-#{$k} {
+    font-size: $size !important;
+  }
+}
+@media (max-width: 767px) {
+  @each $k, $size in $font-size-mob {
+    .text-#{$k} {
+      font-size: $size !important;
+    }
+  }
+}
+@each $k, $pos in $text-posit {
+  .text-#{$k} {
+    text-align: $pos;
+  }
+}
+@each $weight, $value in $text-weight {
+  .text-#{$weight} {
+    font-weight: $value;
+  }
+}
+@each $colors in ($theme-color, $page-color) {
+  @each $color, $color-value in $colors {
+    .text-#{$color} {
+      color: $color-value;
+      &:hover {
+        color: $color-value;
+      }
+    }
+    .bg-#{$color} {
+      background-color: $color-value;
+    }
+    .bd-#{$color} {
+      border-color: $color-value;
+    }
+  }
+}
+@for $i from 0 through 5 {
+  .bd-#{$i} {
+    border-width: $i * 1px;
+  }
+}
+@each $s in $border-style {
+  .bd-#{$s} {
+    border-style: $s;
+  }
+}
+@for $i from 1 through 5 {
+  .rounded-#{$i} {
+    border-radius: calc(#{$unit} * #{$i});
+  }
+}
+@each $screen, $screen-value in $screen-size {
+  @each $visible in (hidden, visible, collapse) {
+    @media (max-width: $screen-value) {
+      .visible-#{$screen}-#{$visible} {
+        visibility: $visible;
+      }
+    }
+  }
+}
+.ratio-16by9 {
+  aspect-ratio: 16 / 9;
+}
+.phone {
+  display: none;
+}
+@media (max-width: 768px) {
+  .phone {
+    display: initial;
+  }
+  .web {
+    display: none;
+  }
+}

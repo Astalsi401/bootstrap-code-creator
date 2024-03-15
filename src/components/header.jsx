@@ -1,8 +1,14 @@
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { setter } from "../assets/store";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { far } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../assets/styles/header.scss";
-import { useEffect } from "react";
+
+library.add(fas, far);
 
 export function Header() {
   const site = useSelector((state) => state.site);
@@ -21,9 +27,9 @@ export function Header() {
   return (
     <header>
       <SelectVersion />
-      <button className="copy" onClick={handleCopy}>
-        copy html
-      </button>
+      <div className="copy" onClick={handleCopy}>
+        <FontAwesomeIcon icon="fa-solid fa-copy" />
+      </div>
     </header>
   );
 }
@@ -36,16 +42,22 @@ function SelectVersion() {
   const customBsVer = {
     ibmi: "3.3.7",
     show: "3.3.6",
+    inno: "3.3.7",
+  };
+  const siteName = {
+    ibmi: "生策會",
+    show: "展會",
+    inno: "新創",
   };
   return (
     <div>
       {pathname.length === 3 && pathname[2] === "custom" ? (
         <label htmlFor="site-version">
-          Site:{" "}
+          發布於:{" "}
           <select name="site-version" id="site-version" value={site} onChange={({ target: { value } }) => dispatch(setter({ site: value, ver: customBsVer[value] }))}>
             {Object.keys(customBsVer).map((key) => (
               <option key={key} value={key}>
-                {key}
+                {siteName[key]}
               </option>
             ))}
           </select>

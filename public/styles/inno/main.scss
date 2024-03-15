@@ -1,8 +1,6 @@
+@import "fix.scss";
 @import "variables.scss";
-$page-colors: ();
+$page-color: ();
 @import "page-fix.scss";
 @import "styles.scss";
 @import "../previewDefault.scss";
-@import "table.scss";
-@import "graph.scss";
-@import "fix.scss";

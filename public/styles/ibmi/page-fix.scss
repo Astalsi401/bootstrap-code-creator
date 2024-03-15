@@ -1,0 +1,28 @@
+html {
+  scroll-behavior: smooth;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  & > * {
+    width: 100%;
+  }
+}
+
+@each $screen, $screen-value in $screen-size {
+  @if $screen != "xs" {
+    @media (min-width: $screen-value) {
+      @for $i from 1 through 12 {
+        .col-#{$screen}-#{$i} {
+          width: calc(100% / 12 * $i);
+        }
+      }
+    }
+  } @else {
+    @for $i from 1 through 12 {
+      .col-#{$screen}-#{$i} {
+        width: calc(100% / 12 * $i);
+      }
+    }
+  }
+}

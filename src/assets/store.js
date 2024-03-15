@@ -40,6 +40,16 @@ const counterSlice = createSlice({
         small: "16px",
         "x-small": "14px",
       },
+      inno: {
+        "xxx-large": "30px",
+        "xx-large": "24px",
+        "x-large": "22px",
+        large: "20px",
+        medium: "18px",
+        small: "16px",
+        "x-small": "14px",
+        "xx-small": "12px",
+      },
     },
     themeColor: {
       ibmi: {
@@ -61,6 +71,15 @@ const counterSlice = createSlice({
         btn: "#c7334c",
         orange: "rgb(255, 81, 0)",
         blue: "#3b5998",
+      },
+      inno: {
+        primary: "rgb(89, 40, 131)",
+        secdonary: "rgb(12, 79, 210)",
+        black: "rgb(0, 0, 0)",
+        white: "rgb(255, 255, 255)",
+        "white-500": "rgb(255, 255, 255, 0.5)",
+        unactivated: "rgb(157, 157, 157)",
+        hl: "rgb(255, 165, 0)",
       },
     },
   },

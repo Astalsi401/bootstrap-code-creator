@@ -9,7 +9,13 @@ header {
     margin: 5px 0;
   }
 }
-
+.copy {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  cursor: pointer;
+  font-size: 18px;
+}
 .font-size {
   input {
     width: 45px;

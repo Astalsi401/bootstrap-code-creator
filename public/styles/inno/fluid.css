@@ -1,0 +1,9 @@
+.center-right {
+  display: none !important;
+}
+.center-left.col-sm-9 {
+  width: 100% !important;
+}
+.row {
+  max-width: 1320px !important;
+}

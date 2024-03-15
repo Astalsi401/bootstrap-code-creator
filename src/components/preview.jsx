@@ -1,12 +1,11 @@
 import { useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { AddBlock } from "./addBlock";
 import { EditBlock } from "./editBlock";
 import { Row, Col } from "./bootstrapElems";
 import { Styling } from "./styling";
 
 export function Preview() {
-  const dispatch = useDispatch();
   const site = useSelector((state) => state.site);
   const rows = useSelector((state) => state.rows);
   const container = useRef(null);
@@ -14,8 +13,8 @@ export function Preview() {
   return (
     <>
       <Styling stylingRef={stylingRef} />
-      <div className="preview" style={{ width: "calc(100% - var(--styling-width))", paddingInline: 10 }}>
-        <div className="main main-center row" style={{ marginInline: "auto", position: "relative", paddingTop: 30 }}>
+      <div className="preview" style={{ width: "calc(100% - var(--styling-width))", paddingInline: 10, paddingTop: 30 }}>
+        <div className="main main-center row" style={{ marginInline: "auto", position: "relative" }}>
           <div ref={container} style={{ width: "100%" }}>
             <BootstrapScripts />
             {site && <link rel="stylesheet" href={`${import.meta.env.BASE_URL}styles/${site}/main.min.css`} />}
@@ -37,12 +36,13 @@ export function Preview() {
 }
 
 function BootstrapScripts() {
+  const site = useSelector((state) => state.site);
   const ver = useSelector((state) => state.ver);
   switch (ver) {
     case "3.3.7":
       return (
         <>
-          <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+          {site === "ibmi" ? <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> : <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>}
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         </>
