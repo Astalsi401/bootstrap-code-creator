@@ -27,9 +27,9 @@ export function Header() {
   return (
     <header>
       <SelectVersion />
-      <div className="copy" onClick={handleCopy}>
+      <button className="copy" onClick={handleCopy}>
         <FontAwesomeIcon icon="fa-solid fa-copy" />
-      </div>
+      </button>
     </header>
   );
 }
