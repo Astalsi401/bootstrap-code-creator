@@ -3,27 +3,16 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./assets/store";
-import { Header } from "./components/header.jsx";
-import { Preview } from "./components/preview.jsx";
+import App from "./App";
 
 const router = createBrowserRouter([
   {
     path: "/bootstrap-code-creator/",
-    element: (
-      <>
-        <Header />
-        <Preview />
-      </>
-    ),
+    element: <App />,
   },
   {
     path: "/bootstrap-code-creator/custom",
-    element: (
-      <>
-        <Header />
-        <Preview />
-      </>
-    ),
+    element: <App />,
   },
 ]);
 

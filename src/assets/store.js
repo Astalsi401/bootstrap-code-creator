@@ -16,7 +16,7 @@ const counterSlice = createSlice({
     ver: "3.3.7",
     site: "ibmi",
     rows: [{ id: 0, cols: [defaultCol] }],
-    step: 100,
+    stylingActive: true,
     currentID: null,
     currntI: null,
     fontSize: {

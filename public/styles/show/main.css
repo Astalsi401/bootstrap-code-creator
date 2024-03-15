@@ -37,7 +37,6 @@
 }
 .row > * {
   float: none;
-  flex-grow: 1;
 }
 
 :root {
@@ -6719,4 +6718,8 @@ html {
 
 .zoom {
   cursor: pointer;
+}
+
+.text-12pt {
+  font-size: 12pt !important;
 }/*# sourceMappingURL=main.css.map */

@@ -1,6 +1,13 @@
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setCol } from "../assets/store";
+import { setCol, setter } from "../assets/store";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { far } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../assets/styles/styling.scss";
+
+library.add(fas, far);
 
 export function Styling({ stylingRef }) {
   const dispatch = useDispatch();
@@ -10,12 +17,17 @@ export function Styling({ stylingRef }) {
   const i = useSelector((state) => state.currentI);
   const themeColor = useSelector((state) => state.themeColor[site]);
   const fontSize = useSelector((state) => state.fontSize[site]);
+  const stylingActive = useSelector((state) => state.stylingActive);
   const col = id !== null && rows[rows.findIndex((row) => row.id === id)].cols[i];
+  const handleActive = () => dispatch(setter({ stylingActive: !stylingActive }));
   return (
-    <div ref={stylingRef} className="styling">
-      <h1>樣式</h1>
-      {id !== null && (
+    <div ref={stylingRef} className={`styling ${stylingActive ? "active" : ""}`}>
+      <div className="toggle" onClick={handleActive}>
+        {stylingActive ? <FontAwesomeIcon icon="fa-solid fa-xmark" /> : <FontAwesomeIcon icon="fa-solid fa-pen-to-square" />}
+      </div>
+      {id !== null && stylingActive && (
         <>
+          <h1>Styles</h1>
           <label htmlFor="screen-size">
             何時切換區塊尺寸:
             <select name="screen-size" id="screen-size" value={col.screen} onChange={({ target: { value } }) => dispatch(setCol({ id, i, screen: value }))}>
@@ -49,14 +61,15 @@ export function Styling({ stylingRef }) {
               ))}
             </select>
           </label>
-          <label htmlFor="img-url">
-            圖片連結:
-            <input name="img-url" id="img-url" type="text" value={col.imgUrl} onChange={({ target: { value } }) => dispatch(setCol({ id, i, imgUrl: value }))} />
-          </label>
-          <label htmlFor="img-alt">
-            圖片說明:
-            <input name="img-alt" id="img-alt" type="text" value={col.imgAlt} onChange={({ target: { value } }) => dispatch(setCol({ id, i, imgAlt: value }))} />
-          </label>
+          {[
+            { id: "img-url", key: "imgUrl", name: "圖片連結" },
+            { id: "img-alt", key: "imgAlt", name: "圖片說明" },
+          ].map((obj) => (
+            <label key={obj.id} htmlFor={obj.id}>
+              {obj.name}:
+              <input name={obj.id} id={obj.id} type="text" value={col[obj.key]} onChange={({ target: { value } }) => dispatch(setCol({ id, i, [obj.key]: value }))} />
+            </label>
+          ))}
         </>
       )}
     </div>

@@ -7493,10 +7493,6 @@
   font-size: 0.6rem !important;
 }
 
-.text-12pt {
-  font-size: 12pt !important;
-}
-
 .text-bold {
   font-weight: bold;
 }
@@ -7591,6 +7587,10 @@
 }
 .text-decoration-underline {
   text-decoration: underline;
+}
+
+.text-12pt {
+  font-size: 12pt !important;
 }
 
 .custom th,

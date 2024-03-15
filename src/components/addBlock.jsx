@@ -1,6 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setter, defaultCol } from "../assets/store";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { far } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../assets/styles/wigets.scss";
+
+library.add(fas, far);
 
 export function AddBlock({ type, id, i }) {
   const dispatch = useDispatch();
@@ -45,10 +51,10 @@ export function AddBlock({ type, id, i }) {
   return (
     <div className={`add-block ${type} ${rows.length === 0 ? "show" : ""}`}>
       <span className="add" onClick={handleAdd}>
-        +
+        <FontAwesomeIcon icon="fa-solid fa-plus" />
       </span>
       <span className="delete" onClick={handleDelete}>
-        -
+        <FontAwesomeIcon icon="fa-solid fa-minus" />
       </span>
     </div>
   );

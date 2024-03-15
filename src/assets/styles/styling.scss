@@ -5,11 +5,23 @@
   padding: 10px;
   top: 0;
   right: 0;
-  width: var(--styling-width);
   height: 100vh;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
   background-color: white;
+  width: var(--styling-width);
+  &.active {
+    width: calc(var(--styling-width) - 50px);
+  }
   label {
     display: block;
+  }
+  .toggle {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    font-size: 2rem;
   }
 }

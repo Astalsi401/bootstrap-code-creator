@@ -1,9 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { AddBlock } from "./addBlock";
 import { EditBlock } from "./editBlock";
 import { Row, Col } from "./bootstrapElems";
-import { setter } from "../assets/store";
 import { Styling } from "./styling";
 
 export function Preview() {
@@ -12,29 +11,25 @@ export function Preview() {
   const rows = useSelector((state) => state.rows);
   const container = useRef(null);
   const stylingRef = useRef(null);
-  const handleResize = () => {
-    dispatch(setter({ step: container.current.clientWidth / 12 }));
-  };
-  useEffect(() => {
-    handleResize();
-  }, []);
   return (
     <>
       <Styling stylingRef={stylingRef} />
-      <div className="preview" style={{ width: "calc(100% - var(--styling-width))" }}>
-        <div ref={container} className="container-fluid" style={{ marginInline: "auto", maxWidth: 1000, position: "relative", paddingTop: 30 }}>
-          <BootstrapScripts />
-          {site && <link rel="stylesheet" href={`${import.meta.env.BASE_URL}/styles/${site}/main.min.css`} />}
-          {rows.length === 0 && <AddBlock type={"type-row"} id={0} />}
-          {rows.map((row) => (
-            <EditBlock key={row.id} id={row.id}>
-              <Row>
-                {row.cols.map((col, i) => (
-                  <Col key={`${row.id}-col-${i}`} screen={col.screen} size={`-${col.size}`} i={i} row={row} col={col} stylingRef={stylingRef} />
-                ))}
-              </Row>
-            </EditBlock>
-          ))}
+      <div className="preview" style={{ width: "calc(100% - var(--styling-width))", paddingInline: 10 }}>
+        <div className="main main-center row" style={{ marginInline: "auto", position: "relative", paddingTop: 30 }}>
+          <div ref={container} style={{ width: "100%" }}>
+            <BootstrapScripts />
+            {site && <link rel="stylesheet" href={`${import.meta.env.BASE_URL}styles/${site}/main.min.css`} />}
+            {rows.length === 0 && <AddBlock type={"type-row"} id={0} />}
+            {rows.map((row) => (
+              <EditBlock key={row.id} id={row.id}>
+                <Row>
+                  {row.cols.map((col, i) => (
+                    <Col key={`${row.id}-col-${i}`} screen={col.screen} size={`-${col.size}`} i={i} row={row} col={col} stylingRef={stylingRef} />
+                  ))}
+                </Row>
+              </EditBlock>
+            ))}
+          </div>
         </div>
       </div>
     </>

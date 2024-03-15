@@ -95,9 +95,6 @@
     font-size: $size-val !important;
   }
 }
-.text-12pt {
-  font-size: 12pt !important;
-}
 @each $weight, $value in $text-weight {
   .text-#{$weight} {
     font-weight: $value;
