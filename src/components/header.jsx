@@ -21,7 +21,8 @@ export function Header() {
       html.querySelectorAll(".editing").forEach((element) => element.classList.remove("editing"));
       return html.innerHTML;
     });
-    navigator.clipboard.writeText(`<style>${await getCss()}</style><div class="custom">${innerHtml.join("")}</div>`);
+    const css = site ? `<style>${await getCss()}</style>` : "";
+    navigator.clipboard.writeText(`${css}<div class="custom">${innerHtml.join("")}</div>`);
   };
   const getCss = async () => await fetch(`${import.meta.env.BASE_URL}/styles/${site}/main.min.css`).then((res) => res.text());
   useEffect(() => {}, [site]);
