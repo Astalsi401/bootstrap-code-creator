@@ -9,10 +9,10 @@ export default function App() {
   const stylingActive = useSelector((state) => state.stylingActive);
 
   useEffect(() => {
-    const rows = localStorage.getItem("rows") || [];
+    const rows = localStorage.getItem("rows") ? JSON.parse(localStorage.getItem("rows")) : [];
     const site = localStorage.getItem("site") || "ibmi";
     const ver = localStorage.getItem("ver") || "3.3.7";
-    dispatch(setter({ site, ver, rows: JSON.parse(rows).map((row) => ({ id: parseInt(row.id), cols: row.cols.map((col) => ({ ...col, size: parseInt(col.size) })) })) }));
+    dispatch(setter({ site, ver, rows: rows.map((row) => ({ id: parseInt(row.id), cols: row.cols.map((col) => ({ ...col, size: parseInt(col.size) })) })) }));
   }, []);
   return (
     <div style={{ "--styling-width": stylingActive ? "350px" : "50px" }}>
